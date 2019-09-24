@@ -47,6 +47,10 @@
             this.button_multiplication = new System.Windows.Forms.Button();
             this.button_division = new System.Windows.Forms.Button();
             this.button_result = new System.Windows.Forms.Button();
+            this.button_sqrt = new System.Windows.Forms.Button();
+            this.button_power = new System.Windows.Forms.Button();
+            this.button_module = new System.Windows.Forms.Button();
+            this.button_delete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // digit_zero
@@ -201,13 +205,13 @@
             // 
             // button_clear
             // 
-            this.button_clear.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.button_clear.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.button_clear.Location = new System.Drawing.Point(124, 268);
             this.button_clear.Name = "button_clear";
             this.button_clear.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.button_clear.Size = new System.Drawing.Size(48, 48);
             this.button_clear.TabIndex = 13;
-            this.button_clear.Text = "C";
+            this.button_clear.Text = "CE";
             this.button_clear.UseVisualStyleBackColor = true;
             this.button_clear.Click += new System.EventHandler(this.Button_clear_Click);
             // 
@@ -226,7 +230,7 @@
             // button_minus
             // 
             this.button_minus.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.button_minus.Location = new System.Drawing.Point(225, 160);
+            this.button_minus.Location = new System.Drawing.Point(279, 106);
             this.button_minus.Name = "button_minus";
             this.button_minus.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.button_minus.Size = new System.Drawing.Size(48, 48);
@@ -238,7 +242,7 @@
             // button_multiplication
             // 
             this.button_multiplication.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.button_multiplication.Location = new System.Drawing.Point(225, 214);
+            this.button_multiplication.Location = new System.Drawing.Point(225, 160);
             this.button_multiplication.Name = "button_multiplication";
             this.button_multiplication.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.button_multiplication.Size = new System.Drawing.Size(48, 48);
@@ -250,7 +254,7 @@
             // button_division
             // 
             this.button_division.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.button_division.Location = new System.Drawing.Point(225, 268);
+            this.button_division.Location = new System.Drawing.Point(279, 160);
             this.button_division.Name = "button_division";
             this.button_division.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.button_division.Size = new System.Drawing.Size(48, 48);
@@ -269,11 +273,63 @@
             this.button_result.UseVisualStyleBackColor = true;
             this.button_result.Click += new System.EventHandler(this.Button_result_Click);
             // 
+            // button_sqrt
+            // 
+            this.button_sqrt.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.button_sqrt.Location = new System.Drawing.Point(279, 214);
+            this.button_sqrt.Name = "button_sqrt";
+            this.button_sqrt.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.button_sqrt.Size = new System.Drawing.Size(48, 48);
+            this.button_sqrt.TabIndex = 19;
+            this.button_sqrt.Text = "√";
+            this.button_sqrt.UseVisualStyleBackColor = true;
+            this.button_sqrt.Click += new System.EventHandler(this.Button_sqrt_Click);
+            // 
+            // button_power
+            // 
+            this.button_power.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.button_power.Location = new System.Drawing.Point(225, 214);
+            this.button_power.Name = "button_power";
+            this.button_power.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.button_power.Size = new System.Drawing.Size(48, 48);
+            this.button_power.TabIndex = 20;
+            this.button_power.Text = "^";
+            this.button_power.UseVisualStyleBackColor = true;
+            this.button_power.Click += new System.EventHandler(this.Button_power_Click);
+            // 
+            // button_module
+            // 
+            this.button_module.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.button_module.Location = new System.Drawing.Point(279, 268);
+            this.button_module.Name = "button_module";
+            this.button_module.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.button_module.Size = new System.Drawing.Size(48, 48);
+            this.button_module.TabIndex = 21;
+            this.button_module.Text = "%";
+            this.button_module.UseVisualStyleBackColor = true;
+            this.button_module.Click += new System.EventHandler(this.Button_module_Click_1);
+            // 
+            // button_delete
+            // 
+            this.button_delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.button_delete.Location = new System.Drawing.Point(225, 268);
+            this.button_delete.Name = "button_delete";
+            this.button_delete.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.button_delete.Size = new System.Drawing.Size(48, 48);
+            this.button_delete.TabIndex = 22;
+            this.button_delete.Text = "C";
+            this.button_delete.UseVisualStyleBackColor = true;
+            this.button_delete.Click += new System.EventHandler(this.Button_delete_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(449, 352);
+            this.Controls.Add(this.button_delete);
+            this.Controls.Add(this.button_module);
+            this.Controls.Add(this.button_power);
+            this.Controls.Add(this.button_sqrt);
             this.Controls.Add(this.button_result);
             this.Controls.Add(this.button_division);
             this.Controls.Add(this.button_multiplication);
@@ -321,6 +377,10 @@
         private System.Windows.Forms.Button button_multiplication;
         private System.Windows.Forms.Button button_division;
         private System.Windows.Forms.Button button_result;
+        private System.Windows.Forms.Button button_sqrt;
+        private System.Windows.Forms.Button button_power;
+        private System.Windows.Forms.Button button_module;
+        private System.Windows.Forms.Button button_delete;
     }
 }
 

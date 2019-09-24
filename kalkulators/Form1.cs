@@ -10,6 +10,11 @@ using System.Windows.Forms;
 
 namespace kalkulators
 {
+
+    //TODO Clear math error with next button press
+    //TODO Add some history
+
+
     public partial class Form1 : Form
     {
         double operand1;
@@ -85,12 +90,14 @@ namespace kalkulators
             this.screen_box.Text += "0";
         }
 
-        //TODO Add verifications, so you cannot use 2 operators in a row.
-        //TODO Add history
-        //TODO Clear math error with next button press
 
         private void Button_plus_Click(object sender, EventArgs e)
         {
+            if(is_last_character_operator())
+            {
+                return;
+            }
+
             operand1 = Double.Parse(input);
             this.screen_box.Text = screen_box.Text + "+";
             operation = '+';
@@ -100,6 +107,10 @@ namespace kalkulators
 
         private void Button_minus_Click(object sender, EventArgs e)
         {
+            if (is_last_character_operator())
+            {
+                return;
+            }
             operand1 = Double.Parse(input);
             this.screen_box.Text = screen_box.Text + "-";
             operation = '-';
@@ -109,6 +120,12 @@ namespace kalkulators
 
         private void Button_multiplication_Click(object sender, EventArgs e)
         {
+            if (is_last_character_operator())
+            {
+                return;
+            }
+
+
             operand1 = Double.Parse(input);
             this.screen_box.Text = screen_box.Text + "*";
             operation = '*';
@@ -118,6 +135,11 @@ namespace kalkulators
 
         private void Button_division_Click(object sender, EventArgs e)
         {
+            if (is_last_character_operator())
+            {
+                return;
+            }
+
             operand1 = Double.Parse(input);
             this.screen_box.Text = screen_box.Text + "/";
             operation = '/';
@@ -127,6 +149,11 @@ namespace kalkulators
 
         private void Button_result_Click(object sender, EventArgs e)
         {
+            if(input == string.Empty)
+            {
+                return;
+            }
+
             operand2 = Double.Parse(input);
             bool math_error = false;
 
@@ -140,6 +167,12 @@ namespace kalkulators
                     break;
                 case '*':
                     result = operand1 * operand2;
+                    break;
+                case '%':
+                    result = operand1 % operand2;
+                    break;
+                case '^':
+                    result = Math.Pow(operand1, operand2);
                     break;
                 case '/':
                     if(operand2 == 0)
@@ -174,10 +207,106 @@ namespace kalkulators
 
         private void Button_comma_Click(object sender, EventArgs e)
         {
-            if(!this.screen_box.Text.EndsWith("."))
+            if (is_last_character_operator())
+            {
+                return;
+            }
+
+            if (!this.screen_box.Text.EndsWith("."))
             {
                 this.screen_box.Text += ".";
                 input += ".";
+            }
+        }
+
+        private void Button_power_Click(object sender, EventArgs e)
+        {
+            if (is_last_character_operator())
+            {
+                return;
+            }
+
+            operand1 = Double.Parse(input);
+            this.screen_box.Text = screen_box.Text + "^";
+            operation = '^';
+            input = string.Empty;
+        }
+
+        private void Button_sqrt_Click(object sender, EventArgs e)
+        {
+            if(is_last_character_operator())
+            {
+                return;
+            }
+
+            operand1 = Double.Parse(input);
+            result = Math.Sqrt(operand1);
+            this.screen_box.Text = string.Concat(result);
+            input = string.Concat(result);
+        }
+
+        private void Button_module_Click_1(object sender, EventArgs e)
+        {
+            if (is_last_character_operator())
+            {
+                return;
+            }
+
+            operand1 = Double.Parse(input);
+            this.screen_box.Text = screen_box.Text + "%";
+            operation = '%';
+            input = string.Empty;
+        }
+
+        private void Button_delete_Click(object sender, EventArgs e)
+        {
+            if (is_textbox_empty())
+            {
+                return;
+            }
+
+            if (is_last_character_operator() == false && input.Length != 0)
+            {
+                input.Remove(input.Length - 1);
+
+            }
+
+            this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
+
+
+        }
+        private bool is_textbox_empty()
+        {
+            if (this.screen_box.Text.Length == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+            
+
+        private bool is_last_character_operator()
+        {
+            if (is_textbox_empty())
+            {
+                Console.WriteLine("TextBox is empty!");
+                return true;
+            }
+            char last_character = this.screen_box.Text[this.screen_box.Text.Length - 1];
+
+
+            if(last_character.Equals('+') || last_character.Equals('-') || last_character.Equals('/') ||
+                last_character.Equals('*') || last_character.Equals('%') || last_character.Equals('^'))
+            {
+                Console.WriteLine($"Last character:{last_character} ");
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
