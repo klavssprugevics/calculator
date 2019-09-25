@@ -193,6 +193,10 @@ namespace kalkulators
             }
             else
             {
+                string history = this.screen_box.Text + "=";
+                history += result;
+                this.history_textbox.AppendText(history + "\n");
+
                 this.screen_box.Text = string.Concat(result);
                 input = string.Concat(result);
             }
@@ -309,5 +313,6 @@ namespace kalkulators
                 return false;
             }
         }
+
     }
 }

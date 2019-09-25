@@ -51,6 +51,8 @@
             this.button_power = new System.Windows.Forms.Button();
             this.button_module = new System.Windows.Forms.Button();
             this.button_delete = new System.Windows.Forms.Button();
+            this.history_textbox = new System.Windows.Forms.RichTextBox();
+            this.history_label = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // digit_zero
@@ -321,11 +323,31 @@
             this.button_delete.UseVisualStyleBackColor = true;
             this.button_delete.Click += new System.EventHandler(this.Button_delete_Click);
             // 
+            // history_textbox
+            // 
+            this.history_textbox.Location = new System.Drawing.Point(390, 41);
+            this.history_textbox.Name = "history_textbox";
+            this.history_textbox.Size = new System.Drawing.Size(135, 299);
+            this.history_textbox.TabIndex = 23;
+            this.history_textbox.Text = "";
+            // 
+            // history_label
+            // 
+            this.history_label.AutoSize = true;
+            this.history_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.history_label.Location = new System.Drawing.Point(428, 9);
+            this.history_label.Name = "history_label";
+            this.history_label.Size = new System.Drawing.Size(58, 20);
+            this.history_label.TabIndex = 24;
+            this.history_label.Text = "History";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(449, 352);
+            this.ClientSize = new System.Drawing.Size(567, 352);
+            this.Controls.Add(this.history_label);
+            this.Controls.Add(this.history_textbox);
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.button_module);
             this.Controls.Add(this.button_power);
@@ -381,6 +403,8 @@
         private System.Windows.Forms.Button button_power;
         private System.Windows.Forms.Button button_module;
         private System.Windows.Forms.Button button_delete;
+        private System.Windows.Forms.RichTextBox history_textbox;
+        private System.Windows.Forms.Label history_label;
     }
 }
 
