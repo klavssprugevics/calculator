@@ -9,14 +9,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+
 namespace kalkulators
 {
-
-    //TODO Clear math error with next button press
-    //TODO valūtu konvertācija
-
+    
 
     //TODO pārveidot, lai input validācijai izmantotu regex
+    //TODO darbības pie viena operatora funkcijām atkārtojas!!!
+       
 
     public partial class Form1 : Form
     {
@@ -25,8 +26,8 @@ namespace kalkulators
         char operation;
         double result;
         string history = string.Empty;
-
         string input = string.Empty;
+
 
 
         public Form1()
@@ -358,6 +359,88 @@ namespace kalkulators
                 streamWriter.Write(this.history_textbox.Text);
                 streamWriter.Close();
             }
+        }
+
+        private void Button_nat_log_Click(object sender, EventArgs e)
+        {
+            if (is_last_character_operator())
+            {
+                return;
+            }
+
+            operand1 = Double.Parse(input);
+            result = Math.Log(operand1);
+
+            history = "ln(" + this.screen_box.Text + ") =";
+            history += result;
+            this.history_textbox.AppendText(history + "\n");
+
+            this.screen_box.Text = string.Concat(result);
+            input = string.Concat(result);
+
+        }
+
+        private void Button_factorial_Click(object sender, EventArgs e)
+        {
+            if (is_last_character_operator())
+            {
+                return;
+            }
+
+            operand1 = Double.Parse(input);
+            result = factorial(operand1);
+
+            history = this.screen_box.Text + "! = ";
+            history += result;
+            this.history_textbox.AppendText(history + "\n");
+
+            this.screen_box.Text = string.Concat(result);
+            input = string.Concat(result);
+        }
+
+        private double factorial(double n)
+        {
+            if (n == 1)
+                return 1;
+
+            return n * factorial(n - 1);
+
+        }
+
+        private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void SaveHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Save_history_button_Click(sender, e);
+        }
+
+        private void DarkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(lightToolStripMenuItem.Checked)
+            {
+                lightToolStripMenuItem.Checked = false;
+                darkToolStripMenuItem.Checked = true;
+
+                this.BackColor = System.Drawing.Color.LightSlateGray;
+
+            }
+
+            
+        }
+
+        private void LightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (darkToolStripMenuItem.Checked)
+            {
+                darkToolStripMenuItem.Checked = false;
+                lightToolStripMenuItem.Checked = true;
+
+                this.BackColor = SystemColors.Control;
+            }
+
         }
     }
 }
