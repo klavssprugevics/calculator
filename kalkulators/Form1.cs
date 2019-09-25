@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,7 @@ namespace kalkulators
 
     //TODO Clear math error with next button press
     //TODO valūtu konvertācija
-    //TODO saglabāt vēstures log .txt
-    //TODO kvadratsaknei & mosk ari citi operatori neraksta veesturee
+
 
     //TODO pārveidot, lai input validācijai izmantotu regex
 
@@ -24,6 +24,7 @@ namespace kalkulators
         double operand2;
         char operation;
         double result;
+        string history = string.Empty;
 
         string input = string.Empty;
 
@@ -187,16 +188,24 @@ namespace kalkulators
                         result = operand1 / operand2;
                     }
                     break;
+                default:
+                    {
+                        return;
+                    }
             }
 
             if(math_error)
             {
-                this.screen_box.Text = "MATH ERROR";
+                MessageBox.Show("MATH ERROR");
+                this.screen_box.Text = string.Empty;
                 input = string.Empty;
             }
             else
             {
-                string history = this.screen_box.Text + "=";
+                operand1 = result;
+                operation = ' ';
+
+                history = this.screen_box.Text + "=";
                 history += result;
                 this.history_textbox.AppendText(history + "\n");
 
@@ -248,8 +257,15 @@ namespace kalkulators
 
             operand1 = Double.Parse(input);
             result = Math.Sqrt(operand1);
+
+            history = "sqrt(" + this.screen_box.Text + ") =";
+            history += result;
+            this.history_textbox.AppendText(history + "\n");
+
             this.screen_box.Text = string.Concat(result);
             input = string.Concat(result);
+
+
         }
 
         private void Button_module_Click_1(object sender, EventArgs e)
@@ -317,5 +333,31 @@ namespace kalkulators
             }
         }
 
+        private void Clear_history_button_Click(object sender, EventArgs e)
+        {
+            history = string.Empty;
+            this.history_textbox.Text = string.Empty;
+        }
+
+        private void Save_history_button_Click(object sender, EventArgs e)
+        {
+
+            //Izveido jaunu saveFileDialog objektu, lai izveletos path
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Text file|*.txt";
+            saveFileDialog1.Title = "Save log";
+            saveFileDialog1.ShowDialog();
+
+            string path = saveFileDialog1.FileName;
+
+            //Ja path nav empty, tad ieraksta visu history failā un saglabā path
+            if(path != "")
+            {
+
+                StreamWriter streamWriter = new StreamWriter(path);
+                streamWriter.Write(this.history_textbox.Text);
+                streamWriter.Close();
+            }
+        }
     }
 }

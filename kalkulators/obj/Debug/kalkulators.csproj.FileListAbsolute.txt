@@ -28,3 +28,13 @@ C:\Users\s7_spruge_k\Source\Repos\calculator\kalkulators\obj\Debug\kalkulators.c
 C:\Users\s7_spruge_k\Source\Repos\calculator\kalkulators\obj\Debug\kalkulators.csproj.CoreCompileInputs.cache
 C:\Users\s7_spruge_k\Source\Repos\calculator\kalkulators\obj\Debug\kalkulators.exe
 C:\Users\s7_spruge_k\Source\Repos\calculator\kalkulators\obj\Debug\kalkulators.pdb
+C:\Users\Klavs.DESKTOP-DIODSBB\source\repos\calculator\kalkulators\bin\Debug\kalkulators.exe.config
+C:\Users\Klavs.DESKTOP-DIODSBB\source\repos\calculator\kalkulators\bin\Debug\kalkulators.exe
+C:\Users\Klavs.DESKTOP-DIODSBB\source\repos\calculator\kalkulators\bin\Debug\kalkulators.pdb
+C:\Users\Klavs.DESKTOP-DIODSBB\source\repos\calculator\kalkulators\obj\Debug\kalkulators.csprojAssemblyReference.cache
+C:\Users\Klavs.DESKTOP-DIODSBB\source\repos\calculator\kalkulators\obj\Debug\kalkulators.Form1.resources
+C:\Users\Klavs.DESKTOP-DIODSBB\source\repos\calculator\kalkulators\obj\Debug\kalkulators.Properties.Resources.resources
+C:\Users\Klavs.DESKTOP-DIODSBB\source\repos\calculator\kalkulators\obj\Debug\kalkulators.csproj.GenerateResource.cache
+C:\Users\Klavs.DESKTOP-DIODSBB\source\repos\calculator\kalkulators\obj\Debug\kalkulators.csproj.CoreCompileInputs.cache
+C:\Users\Klavs.DESKTOP-DIODSBB\source\repos\calculator\kalkulators\obj\Debug\kalkulators.exe
+C:\Users\Klavs.DESKTOP-DIODSBB\source\repos\calculator\kalkulators\obj\Debug\kalkulators.pdb

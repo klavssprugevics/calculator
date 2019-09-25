@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.digit_zero = new System.Windows.Forms.Button();
             this.screen_box = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,6 +54,8 @@
             this.button_delete = new System.Windows.Forms.Button();
             this.history_textbox = new System.Windows.Forms.RichTextBox();
             this.history_label = new System.Windows.Forms.Label();
+            this.clear_history_button = new System.Windows.Forms.Button();
+            this.save_history_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // digit_zero
@@ -72,6 +75,7 @@
             this.screen_box.Location = new System.Drawing.Point(16, 46);
             this.screen_box.Multiline = true;
             this.screen_box.Name = "screen_box";
+            this.screen_box.ReadOnly = true;
             this.screen_box.Size = new System.Drawing.Size(156, 43);
             this.screen_box.TabIndex = 1;
             // 
@@ -327,7 +331,8 @@
             // 
             this.history_textbox.Location = new System.Drawing.Point(390, 41);
             this.history_textbox.Name = "history_textbox";
-            this.history_textbox.Size = new System.Drawing.Size(135, 299);
+            this.history_textbox.ReadOnly = true;
+            this.history_textbox.Size = new System.Drawing.Size(135, 260);
             this.history_textbox.TabIndex = 23;
             this.history_textbox.Text = "";
             // 
@@ -341,11 +346,34 @@
             this.history_label.TabIndex = 24;
             this.history_label.Text = "History";
             // 
+            // clear_history_button
+            // 
+            this.clear_history_button.Location = new System.Drawing.Point(390, 307);
+            this.clear_history_button.Name = "clear_history_button";
+            this.clear_history_button.Size = new System.Drawing.Size(68, 23);
+            this.clear_history_button.TabIndex = 25;
+            this.clear_history_button.Text = "Clear";
+            this.clear_history_button.UseVisualStyleBackColor = true;
+            this.clear_history_button.Click += new System.EventHandler(this.Clear_history_button_Click);
+            // 
+            // save_history_button
+            // 
+            this.save_history_button.Location = new System.Drawing.Point(464, 307);
+            this.save_history_button.Name = "save_history_button";
+            this.save_history_button.Size = new System.Drawing.Size(61, 23);
+            this.save_history_button.TabIndex = 26;
+            this.save_history_button.Text = "Save";
+            this.save_history_button.UseVisualStyleBackColor = true;
+            this.save_history_button.Click += new System.EventHandler(this.Save_history_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(567, 352);
+            this.Controls.Add(this.save_history_button);
+            this.Controls.Add(this.clear_history_button);
             this.Controls.Add(this.history_label);
             this.Controls.Add(this.history_textbox);
             this.Controls.Add(this.button_delete);
@@ -371,8 +399,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.screen_box);
             this.Controls.Add(this.digit_zero);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(583, 391);
+            this.MinimumSize = new System.Drawing.Size(583, 391);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Kalulkators - Klāvs Spruģevics";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -405,6 +436,8 @@
         private System.Windows.Forms.Button button_delete;
         private System.Windows.Forms.RichTextBox history_textbox;
         private System.Windows.Forms.Label history_label;
+        private System.Windows.Forms.Button clear_history_button;
+        private System.Windows.Forms.Button save_history_button;
     }
 }
 
