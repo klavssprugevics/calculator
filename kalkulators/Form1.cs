@@ -12,8 +12,11 @@ namespace kalkulators
 {
 
     //TODO Clear math error with next button press
-    //TODO Add some history
+    //TODO valūtu konvertācija
+    //TODO saglabāt vēstures log .txt
+    //TODO kvadratsaknei & mosk ari citi operatori neraksta veesturee
 
+    //TODO pārveidot, lai input validācijai izmantotu regex
 
     public partial class Form1 : Form
     {
