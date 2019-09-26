@@ -19,6 +19,15 @@ namespace kalkulators
     //TODO darbības pie viena operatora funkcijām atkārtojas!!!
        
 
+    //TODO sākumā var izvēlēties negatīvu skaitli
+    //TODO overwritot last operatoru ar new one
+
+    //TODO message box to close on menu strip
+
+
+    //TODO pareizi nosaukti mainīgi un tie ir vienādā stilā
+
+
     public partial class Form1 : Form
     {
         double operand1;
@@ -363,12 +372,17 @@ namespace kalkulators
 
         private void Button_nat_log_Click(object sender, EventArgs e)
         {
-            if (is_last_character_operator())
+            if(is_last_character_operator())
             {
                 return;
             }
 
             operand1 = Double.Parse(input);
+
+            if(operand1 <= 0)
+            {
+                return;
+            }
             result = Math.Log(operand1);
 
             history = "ln(" + this.screen_box.Text + ") =";
@@ -387,7 +401,16 @@ namespace kalkulators
                 return;
             }
 
+
+
             operand1 = Double.Parse(input);
+
+            if(operand1 % 1 != 0 || operand1 < 0)
+            {
+
+                return;
+            }
+
             result = factorial(operand1);
 
             history = this.screen_box.Text + "! = ";
@@ -409,7 +432,17 @@ namespace kalkulators
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            string quitMessage = "Are you sure you want to quit?";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+       
+
+            DialogResult result = MessageBox.Show(quitMessage, "", buttons);
+            if(result == System.Windows.Forms.DialogResult.Yes)
+            {
+                this.Close();
+                Application.Exit();
+
+            }
         }
 
         private void SaveHistoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -442,5 +475,15 @@ namespace kalkulators
             }
 
         }
+
+
+
+
+
     }
 }
+
+//if checkbox checked
+//streamwriter(filename, append: true)
+//writer.writeline(expr)
+//writer.close()
