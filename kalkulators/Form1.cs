@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,19 +14,18 @@ using System.Windows.Forms;
 
 namespace kalkulators
 {
-    //TODO sākumā var izvēlēties negatīvu skaitli
-    //TODO message box to close when pressing "X"
     //TODO Nicer dizains
     //TODO Conversion -> New form vai arī expanded windows
 
 
-    //BUGS
-    // operand, operation, C, new operation -> crash
+    //KNOWN BUGS
+	// "-" -> operand1 -> "=" -> NaN
+	// after "-" at start can used operator -> crash
 
     public partial class Form1 : Form
     {
-        double operand1;                    // 1st operand, parsed after selecting an operation.
-        double operand2;                    // 2nd operand, parsed after pressing "=" button.
+        double operand1 = double.NaN;       // 1st operand, parsed after selecting an operation.
+        double operand2 = double.NaN;       // 2nd operand, parsed after pressing "=" button.
         char operation;                     // Operation selected by the user with buttons.
         double result;                      // Result after an operation, afterwards Operand1 = result.
 
@@ -119,6 +119,11 @@ namespace kalkulators
         // Operation(2 operands) button click events.
         private void Button_plus_Click(object sender, EventArgs e)
         {
+			if(input.Equals(""))
+			{
+				return;
+			}
+
             if(is_last_character_operator())
             {
                 // If the user wants to change the operator, they can just change by pressing on a different one.
@@ -132,7 +137,14 @@ namespace kalkulators
 
         private void Button_minus_Click(object sender, EventArgs e)
         {
-            if (is_last_character_operator())
+			if (input.Equals(""))
+			{
+				input += "-";
+				this.screen_box.Text += "-";
+				Console.WriteLine("First operand is negative!");
+				return;
+			}
+			else if (is_last_character_operator())
             {
                 this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
                 this.screen_box.Text += "-";
@@ -144,7 +156,12 @@ namespace kalkulators
 
         private void Button_multiplication_Click(object sender, EventArgs e)
         {
-            if (is_last_character_operator())
+			if (input.Equals(""))
+			{
+				return;
+			}
+
+			if (is_last_character_operator())
             {
                 this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
                 this.screen_box.Text += "*";
@@ -156,7 +173,12 @@ namespace kalkulators
 
         private void Button_division_Click(object sender, EventArgs e)
         {
-            if (is_last_character_operator())
+			if (input.Equals(""))
+			{
+				return;
+			}
+
+			if (is_last_character_operator())
             {
                 this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
                 this.screen_box.Text += "/";
@@ -168,7 +190,12 @@ namespace kalkulators
 
         private void Button_power_Click(object sender, EventArgs e)
         {
-            if (is_last_character_operator())
+			if (input.Equals(""))
+			{
+				return;
+			}
+
+			if (is_last_character_operator())
             {
                 this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
                 this.screen_box.Text += "^";
@@ -180,7 +207,12 @@ namespace kalkulators
 
         private void Button_module_Click_1(object sender, EventArgs e)
         {
-            if (is_last_character_operator())
+			if (input.Equals(""))
+			{
+				return;
+			}
+
+			if (is_last_character_operator())
             {
                 this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
                 this.screen_box.Text += "%";
@@ -242,8 +274,8 @@ namespace kalkulators
         {
             this.screen_box.Text = string.Empty;
             input = string.Empty;
-            operand1 = 0;
-            operand2 = 0;
+            operand1 = double.NaN;
+            operand2 = double.NaN;
         }
 
         // Deletes the last character in the input (not operand).
@@ -292,22 +324,41 @@ namespace kalkulators
 
         // Menu strip button click events.
 
+		// Close button event in menu strip.
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string quitMessage = "Are you sure you want to quit?";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-
-
-            DialogResult result = MessageBox.Show(quitMessage, "", buttons);
-            if (result == System.Windows.Forms.DialogResult.Yes)
-            {
-                this.Close();
-                Application.Exit();
-
-            }
+			// No need to call close_confirmation() because this event calls form closing event.
+			Application.Exit();
         }
 
-        private void SaveHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+		// Close button event "X".
+		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if(!close_confirmation())
+			{
+				e.Cancel= true;
+				return;
+			}
+		}
+
+		// Asks for confirmation when trying to close the window.
+		private bool close_confirmation()
+		{
+			string quitMessage = "Are you sure you want to quit?";
+			MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+
+			DialogResult result = MessageBox.Show(quitMessage, "", buttons);
+			if (result == System.Windows.Forms.DialogResult.Yes)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		private void SaveHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Save_history_button_Click(sender, e);
         }
@@ -386,8 +437,8 @@ namespace kalkulators
                 MessageBox.Show("MATH ERROR");
                 this.screen_box.Text = string.Empty;
                 input = string.Empty;
-                operand1 = 0;
-                operand2 = 0;
+                operand1 = double.NaN;
+                operand2 = double.NaN;
             }
             else
             {
@@ -446,10 +497,35 @@ namespace kalkulators
         // All operations that require two operands are defined here.
         private void parse_two_operand_operation(char oper)
         {
-            operand1 = Double.Parse(input);
-            this.screen_box.Text = screen_box.Text + oper;
-            operation = oper;
-            input = string.Empty;
+			Console.WriteLine($"operand: {operand1}");
+			Console.WriteLine("input: " + input);
+
+			string negative_number_regex = @"^-\d+(\.)?(\d+)?";
+
+			if (operand1.Equals(double.NaN) && input.Equals(""))
+			{
+				return;
+			}
+			else if(input.Equals(""))
+			{
+				this.screen_box.Text = screen_box.Text + oper;
+				operation = oper;
+			}
+			else if(Regex.IsMatch(input, negative_number_regex))
+			{
+				input.Remove(0);
+				operand1 = Double.Parse(input);
+				this.screen_box.Text = screen_box.Text + oper;
+				operation = oper;
+				input = string.Empty;
+			}
+			else
+			{
+				operand1 = Double.Parse(input);
+				this.screen_box.Text = screen_box.Text + oper;
+				operation = oper;
+				input = string.Empty;
+			}
         }
 
         // Recurrent function for a factorial.
@@ -485,5 +561,6 @@ namespace kalkulators
             }
         }
 
-    }
+
+	}
 }
