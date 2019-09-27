@@ -337,7 +337,7 @@
             this.button_delete.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.button_delete.Size = new System.Drawing.Size(48, 48);
             this.button_delete.TabIndex = 22;
-            this.button_delete.Text = "C";
+            this.button_delete.Text = "->";
             this.button_delete.UseVisualStyleBackColor = true;
             this.button_delete.Click += new System.EventHandler(this.Button_delete_Click);
             // 

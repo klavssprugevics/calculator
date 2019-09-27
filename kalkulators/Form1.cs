@@ -111,12 +111,7 @@ namespace kalkulators
             {
                 return;
             }
-
-            operand1 = Double.Parse(input);
-            this.screen_box.Text = screen_box.Text + "+";
-            operation = '+';
-            input = string.Empty;
-
+            parse_operation('+');
         }
 
         private void Button_minus_Click(object sender, EventArgs e)
@@ -125,11 +120,7 @@ namespace kalkulators
             {
                 return;
             }
-            operand1 = Double.Parse(input);
-            this.screen_box.Text = screen_box.Text + "-";
-            operation = '-';
-            input = string.Empty;
-
+            parse_operation('-');
         }
 
         private void Button_multiplication_Click(object sender, EventArgs e)
@@ -138,13 +129,7 @@ namespace kalkulators
             {
                 return;
             }
-
-
-            operand1 = Double.Parse(input);
-            this.screen_box.Text = screen_box.Text + "*";
-            operation = '*';
-            input = string.Empty;
-
+            parse_operation('*');
         }
 
         private void Button_division_Click(object sender, EventArgs e)
@@ -153,20 +138,16 @@ namespace kalkulators
             {
                 return;
             }
-
-            operand1 = Double.Parse(input);
-            this.screen_box.Text = screen_box.Text + "/";
-            operation = '/';
-            input = string.Empty;
-
+            parse_operation('/');
         }
 
         private void Button_result_Click(object sender, EventArgs e)
         {
-            if(input == string.Empty)
+            if(input == "")
             {
                 return;
             }
+
 
             operand2 = Double.Parse(input);
             bool math_error = false;
@@ -251,11 +232,7 @@ namespace kalkulators
             {
                 return;
             }
-
-            operand1 = Double.Parse(input);
-            this.screen_box.Text = screen_box.Text + "^";
-            operation = '^';
-            input = string.Empty;
+            parse_operation('^');
         }
 
         private void Button_sqrt_Click(object sender, EventArgs e)
@@ -284,11 +261,7 @@ namespace kalkulators
             {
                 return;
             }
-
-            operand1 = Double.Parse(input);
-            this.screen_box.Text = screen_box.Text + "%";
-            operation = '%';
-            input = string.Empty;
+            parse_operation('%');
         }
 
         private void Button_delete_Click(object sender, EventArgs e)
@@ -400,9 +373,6 @@ namespace kalkulators
             {
                 return;
             }
-
-
-
             operand1 = Double.Parse(input);
 
             if(operand1 % 1 != 0 || operand1 < 0)
@@ -476,6 +446,13 @@ namespace kalkulators
 
         }
 
+        private void parse_operation(char oper)
+        {
+            operand1 = Double.Parse(input);
+            this.screen_box.Text = screen_box.Text + oper;
+            operation = oper;
+            input = string.Empty;
+        }
 
 
 
