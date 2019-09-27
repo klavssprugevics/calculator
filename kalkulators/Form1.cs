@@ -14,11 +14,13 @@ using System.Windows.Forms;
 namespace kalkulators
 {
     //TODO sākumā var izvēlēties negatīvu skaitli
-    //TODO overwritot last operatoru ar new one
     //TODO message box to close when pressing "X"
     //TODO Nicer dizains
     //TODO Conversion -> New form vai arī expanded windows
 
+
+    //BUGS
+    // operand, operation, C, new operation -> crash
 
     public partial class Form1 : Form
     {
@@ -119,6 +121,10 @@ namespace kalkulators
         {
             if(is_last_character_operator())
             {
+                // If the user wants to change the operator, they can just change by pressing on a different one.
+                this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
+                this.screen_box.Text += "+";
+                operation = '+';
                 return;
             }
             parse_two_operand_operation('+');
@@ -128,6 +134,9 @@ namespace kalkulators
         {
             if (is_last_character_operator())
             {
+                this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
+                this.screen_box.Text += "-";
+                operation = '-';
                 return;
             }
             parse_two_operand_operation('-');
@@ -137,6 +146,9 @@ namespace kalkulators
         {
             if (is_last_character_operator())
             {
+                this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
+                this.screen_box.Text += "*";
+                operation = '*';
                 return;
             }
             parse_two_operand_operation('*');
@@ -146,6 +158,9 @@ namespace kalkulators
         {
             if (is_last_character_operator())
             {
+                this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
+                this.screen_box.Text += "/";
+                operation = '/';
                 return;
             }
             parse_two_operand_operation('/');
@@ -155,6 +170,9 @@ namespace kalkulators
         {
             if (is_last_character_operator())
             {
+                this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
+                this.screen_box.Text += "^";
+                operation = '^';
                 return;
             }
             parse_two_operand_operation('^');
@@ -164,6 +182,9 @@ namespace kalkulators
         {
             if (is_last_character_operator())
             {
+                this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
+                this.screen_box.Text += "%";
+                operation = '%';
                 return;
             }
             parse_two_operand_operation('%');
