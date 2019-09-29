@@ -18,9 +18,6 @@ namespace kalkulators
     //TODO Conversion -> New form vai arī expanded windows
 
 
-    //KNOWN BUGS
-	// "-" -> operand1 -> "=" -> NaN
-	// after "-" at start can used operator -> crash
 
     public partial class Form1 : Form
     {
@@ -119,7 +116,9 @@ namespace kalkulators
         // Operation(2 operands) button click events.
         private void Button_plus_Click(object sender, EventArgs e)
         {
-			if(input.Equals(""))
+			// Doesnt allow to add just an operator to the input, in case first input is "-" = a negative number,
+			// Changing the operation not allowed.
+			if(input.Equals("") || input.Equals("-"))
 			{
 				return;
 			}
@@ -144,7 +143,7 @@ namespace kalkulators
 				Console.WriteLine("First operand is negative!");
 				return;
 			}
-			else if (is_last_character_operator())
+			else if (is_last_character_operator() && operand1 != double.NaN)
             {
                 this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
                 this.screen_box.Text += "-";
@@ -156,13 +155,14 @@ namespace kalkulators
 
         private void Button_multiplication_Click(object sender, EventArgs e)
         {
-			if (input.Equals(""))
+			if (input.Equals("") || input.Equals("-"))
 			{
 				return;
 			}
 
 			if (is_last_character_operator())
             {
+				Console.WriteLine($"op1:{operand1} ");
                 this.screen_box.Text = this.screen_box.Text.Remove(this.screen_box.Text.Length - 1);
                 this.screen_box.Text += "*";
                 operation = '*';
@@ -173,7 +173,7 @@ namespace kalkulators
 
         private void Button_division_Click(object sender, EventArgs e)
         {
-			if (input.Equals(""))
+			if (input.Equals("") || input.Equals("-"))
 			{
 				return;
 			}
@@ -190,7 +190,7 @@ namespace kalkulators
 
         private void Button_power_Click(object sender, EventArgs e)
         {
-			if (input.Equals(""))
+			if (input.Equals("") || input.Equals("-"))
 			{
 				return;
 			}
@@ -207,7 +207,7 @@ namespace kalkulators
 
         private void Button_module_Click_1(object sender, EventArgs e)
         {
-			if (input.Equals(""))
+			if (input.Equals("") || input.Equals("-"))
 			{
 				return;
 			}
