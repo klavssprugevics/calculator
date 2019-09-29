@@ -48,3 +48,4 @@ C:\Users\Klavs\Source\Repos\calculator\kalkulators\obj\Debug\kalkulators.csproj.
 C:\Users\Klavs\Source\Repos\calculator\kalkulators\obj\Debug\kalkulators.csproj.CoreCompileInputs.cache
 C:\Users\Klavs\Source\Repos\calculator\kalkulators\obj\Debug\kalkulators.exe
 C:\Users\Klavs\Source\Repos\calculator\kalkulators\obj\Debug\kalkulators.pdb
+C:\Users\Klavs.DESKTOP-DIODSBB\source\repos\calculator\kalkulators\obj\Debug\kalkulators.Form2.resources

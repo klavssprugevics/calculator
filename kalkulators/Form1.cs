@@ -15,7 +15,6 @@ using System.Windows.Forms;
 namespace kalkulators
 {
     //TODO Nicer dizains
-    //TODO Conversion -> New form vai arī expanded windows
 
 
 
@@ -29,9 +28,10 @@ namespace kalkulators
         string history = string.Empty;      // String that contains all the equation history.
         string input = string.Empty;        // String that's being parsed into operand1/operand2.
 
+		Form2 conversionForm = new Form2(); // Creates an object of the conversion form.
 
 
-        public Form1()
+		public Form1()
         {
             InitializeComponent();
         }
@@ -385,10 +385,37 @@ namespace kalkulators
             }
         }
 
+		private void CalculatorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (!calculatorToolStripMenuItem.Checked)
+			{
+				calculatorToolStripMenuItem.Checked = true;
+				button_nat_log.Visible = false;
+				button_factorial.Visible = false;
+				button_power.Visible = false;
+				button_sqrt.Visible = false;
+				button_module.Visible = false;
 
+			}
+			else
+			{
+				button_nat_log.Visible = true;
+				button_factorial.Visible = true;
+				button_power.Visible = true;
+				button_sqrt.Visible = true;
+				button_module.Visible = true;
+				calculatorToolStripMenuItem.Checked = false;
+			}
 
-        // Main function for calculating the result after "=" is clicked.
-        private void Button_result_Click(object sender, EventArgs e)
+		}
+
+		private void ConversionToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			conversionForm.Show();
+		}
+
+		// Main function for calculating the result after "=" is clicked.
+		private void Button_result_Click(object sender, EventArgs e)
         {
             // Checks whether the input(2nd operand) is empty.
             if(input == "")
@@ -560,6 +587,8 @@ namespace kalkulators
                 return false;
             }
         }
+
+
 
 
 	}
