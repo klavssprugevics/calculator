@@ -418,7 +418,7 @@ namespace kalkulators
 		private void Button_result_Click(object sender, EventArgs e)
         {
             // Checks whether the input(2nd operand) is empty.
-            if(input == "")
+            if(input == "" || input == "-")
             {
                 return;
             }
