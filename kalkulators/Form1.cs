@@ -226,12 +226,18 @@ namespace kalkulators
         // Operation(1 operand) button click events.
         private void Button_sqrt_Click(object sender, EventArgs e)
         {
-            if (is_last_character_operator())
+
+			if (is_last_character_operator())
             {
                 return;
             }
             operand1 = Double.Parse(input);
-            parse_one_operand_operation("sqrt");
+			if (operand1 < 0)
+			{
+
+				return;
+			}
+			parse_one_operand_operation("sqrt");
         }
 
         private void Button_nat_log_Click(object sender, EventArgs e)
@@ -415,70 +421,6 @@ namespace kalkulators
 		}
 
 		// Main function for calculating the result after "=" is clicked.
-		private void Button_result_Click(object sender, EventArgs e)
-        {
-            // Checks whether the input(2nd operand) is empty.
-            if(input == "" || input == "-")
-            {
-                return;
-            }
-
-            operand2 = Double.Parse(input);
-            bool math_error = false;
-
-            switch (operation)
-            {
-                case '+':
-                    result = operand1 + operand2;
-                    break;
-                case '-':
-                    result = operand1 - operand2;
-                    break;
-                case '*':
-                    result = operand1 * operand2;
-                    break;
-                case '%':
-                    result = operand1 % operand2;
-                    break;
-                case '^':
-                    result = Math.Pow(operand1, operand2);
-                    break;
-                case '/':
-                    if(operand2 == 0)
-                    {
-                        math_error = true;
-                    }
-                    else
-                    {
-                        result = operand1 / operand2;
-                    }
-                    break;
-                default:
-                    {
-                        return;
-                    }
-            }
-
-            if(math_error)
-            {
-                MessageBox.Show("MATH ERROR");
-                this.screen_box.Text = string.Empty;
-                input = string.Empty;
-                operand1 = double.NaN;
-                operand2 = double.NaN;
-            }
-            else
-            {
-                operand1 = result;
-                operation = ' ';
-
-                history = this.screen_box.Text + "=";
-                history += result;
-                this.history_textbox.AppendText(history + "\n");
-                this.screen_box.Text = string.Concat(result);
-                input = string.Concat(result);
-            }
-        }
 
 
         // Various helper functions definitions.
@@ -499,6 +441,17 @@ namespace kalkulators
         // All operations that require only one operand are defined here.
         private void parse_one_operand_operation(string oper)
         {
+			// Cannot allow the user to input an expression for a function, that requires one operand
+			string is_expression_regex = @"^(\-)?\d+(.\d+)?(\+|\-|%|\^|\*|\/)(\-)?\d+(.\d+)?$";
+			if (Regex.IsMatch(screen_box.Text, is_expression_regex))
+			{
+				MessageBox.Show($"{oper} can only take in one operand.");
+				this.screen_box.Text = string.Empty;
+				input = string.Empty;
+				operand1 = double.NaN;
+				operand2 = double.NaN;
+				return;
+			}
             switch (oper)
             {
                 case "sqrt":
